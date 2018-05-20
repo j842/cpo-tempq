@@ -12,16 +12,13 @@ func q3(n int) {
 
 	// each value of i represents moving in one direction (right,down,left,up) as far as needed.
 	for i := 1; i < 2*n; i++ {
-
-		steps := (i + 1) / 2                         // steps in current direction -> [1,1,2,2,3,3,...]
-		d := (2*(steps%2) - 1) * (1 + (n-1)*(1-i%2)) // [right,down,left,up] -> num + [1,N,-1,-N]
+		steps := (i + 1) / 2 // steps in current direction -> [1,1,2,2,3,3,...]
 
 		for j := 1; j <= steps && j < n; j++ {
-			num += d
+			num += [4]int{-n, 1, n, -1}[i%4] // [up,right,down,left] -> num + [-N,1,N,-1]
 			fmt.Printf(", %d", num)
 		}
 	}
-
 	fmt.Printf(", end]")
 }
 
