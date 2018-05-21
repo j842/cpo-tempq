@@ -35,6 +35,11 @@ func main() {
 		os.Exit(1)
 	}
 
+	if n%2 == 0 {
+		fmt.Println("N must be an odd number.")
+		os.Exit(1)
+	}
+
 	fmt.Printf("Running for %dx%d matrix.\n", n, n)
 	q3(n)
 }
