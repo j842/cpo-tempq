@@ -102,7 +102,7 @@ func findbestday(t1 time.Time, t2 time.Time) (string, int64) {
 		if result.QuotaRemaining < 100 {
 			log.Fatal("PANIC! Our quota is almost spent.")
 		}
-		fmt.Printf("Page=%d, Quota=%d, has_more=%t, Num Items=%d\n\n", page, result.QuotaRemaining, more, len(result.Items))
+		fmt.Printf("Page=%d, Quota=%d, has_more=%t, Num Items=%d\n", page, result.QuotaRemaining, more, len(result.Items))
 
 		for _, itm := range result.Items {
 			t := daystr(timeFromUnix(itm.CreationDate))
