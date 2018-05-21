@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -40,21 +39,18 @@ func getBody(page int, t1, t2 time.Time) []byte {
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		log.Fatal("NewRequest: ", err)
-		os.Exit(1)
 	}
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatal("Do: ", err)
-		os.Exit(1)
 	}
 	defer resp.Body.Close()
 
 	body, readErr := ioutil.ReadAll(resp.Body)
 	if readErr != nil {
 		log.Fatal("ReadAll: ", readErr)
-		os.Exit(1)
 	}
 
 	return body
@@ -104,8 +100,7 @@ func findbestday(t1 time.Time, t2 time.Time) (string, int64) {
 		more = result.HasMore
 
 		if result.QuotaRemaining < 100 {
-			fmt.Println("PANIC! Our quota is almost spent.")
-			os.Exit(1)
+			log.Fatal("PANIC! Our quota is almost spent.")
 		}
 		fmt.Printf("Page=%d, Quota=%d, has_more=%t, Num Items=%d\n\n", page, result.QuotaRemaining, more, len(result.Items))
 
